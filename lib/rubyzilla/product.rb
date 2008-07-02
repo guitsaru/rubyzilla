@@ -33,6 +33,13 @@ module Rubyzilla
       result["values"]
     end
     
+    def versions
+      result = Bugzilla.server.call("Bug.legal_values", {
+        :field => 'version', :product_id => @id
+      })
+      result["values"]
+    end
+    
     def to_s
       @name
     end

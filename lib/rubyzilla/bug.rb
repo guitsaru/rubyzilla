@@ -2,7 +2,7 @@ module Rubyzilla
   class Bug
     attr_accessor :id
     
-    # Required create parameters 
+    # Required create parameters
     attr_accessor :product_id, :component_id, :summary, :version
     attr_accessor :component # String value component for creation
     @product # String value component for creation
