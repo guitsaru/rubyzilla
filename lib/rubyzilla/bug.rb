@@ -1,5 +1,3 @@
-require 'rubyzilla'
-
 module Rubyzilla
   class Bug
     attr_accessor :id

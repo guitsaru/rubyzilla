@@ -1,7 +1,7 @@
 require 'xmlrpc/client'
 
-require 'rubyzilla/bug'
-require 'rubyzilla/product'
+Dir.glob(File.join(File.dirname(__FILE__), 'rubyzilla/*.rb')).each {|f| require f}
+
 
 module Rubyzilla
   class Bugzilla

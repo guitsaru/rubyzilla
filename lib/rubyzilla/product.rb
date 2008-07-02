@@ -1,5 +1,3 @@
-require 'rubyzilla'
-
 module Rubyzilla
   class Product
     attr_accessor :id, :name
