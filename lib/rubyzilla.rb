@@ -1,7 +1,7 @@
 require 'xmlrpc/client'
-require 'user'
-require 'bug'
-require 'product'
+
+require 'rubyzilla/bug'
+require 'rubyzilla/product'
 
 module Rubyzilla
   class Bugzilla
@@ -34,11 +34,7 @@ module Rubyzilla
         @@logged_in = true
       end
       
-      user = User.new
-      user.id = @id
-      user.login = login
-      user.password = password
-      return user
+      return @@logged_in
     end
     
     def bug id=nil
