@@ -28,6 +28,13 @@ module Rubyzilla
       return result["values"]
     end
     
+    def milestones
+      result = Bugzilla.server.call("Bug.legal_values", {
+        :field => 'target_milestone', :product_id => @id
+      })
+      result["values"]
+    end
+    
     def to_s
       @name
     end

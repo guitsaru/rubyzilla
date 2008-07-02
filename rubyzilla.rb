@@ -5,19 +5,22 @@ require 'product'
 
 module Rubyzilla
   class Bugzilla
-    attr_accessor :logged_in, :server
     
     def initialize server
       @@server = XMLRPC::Client.new2(server)
+      @@logged_in = false
     end
     
     def self.server
       @@server
     end
     
+    def self.logged_in?
+      @@logged_in
+    end
     
     def login login, password
-      result = bugzilla.server.call("User.login", {
+      result = @@server.call("User.login", {
         :login => login.chomp, :password => password.chomp, 
         :remember => 1
       })
@@ -25,10 +28,10 @@ module Rubyzilla
       @id = result['id']
       
       # Workaround for Bugzilla's broken cookies.
-      if bugzilla.server.cookie =~ /Bugzilla_logincookie=([^;]+)/
-        bugzilla.server.cookie = 
+      if @@server.cookie =~ /Bugzilla_logincookie=([^;]+)/
+        @@server.cookie = 
           "Bugzilla_login=#{@id}; Bugzilla_logincookie=#{$1}"
-        @logged_in = true
+        @@logged_in = true
       end
       
       user = User.new
@@ -38,14 +41,12 @@ module Rubyzilla
       return user
     end
     
-    def bug id
+    def bug id=nil
       return Bug.new(id)
+    end
+    
+    def product id=nil
+      return Product.new(id)
     end
   end
 end
-
-# new_bug_result = bugzilla.server.call("Bug.create", {
-#   :product => 'TestProduct', :component => 'TestComponent', 
-#   :summary => 'This is a test of xmlrpc', :version => 'unspecified', 
-#   :op_sys => "Mac OS", :platform => 'PC'
-# })
