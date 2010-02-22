@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = "rubyzilla"
-  s.version = "0.1.0"
+  s.version = "0.1.1"
   s.date = "2008-07-02"
   s.summary = "Ruby API for bugzilla"
   s.email = "guitsaru@gmail.com"

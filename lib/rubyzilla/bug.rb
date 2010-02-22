@@ -75,5 +75,11 @@ module Rubyzilla
       end
       return self
     end
+    
+    def add_comment(comment)
+      if Bugzilla.logged_in?
+        Bugzilla.server.call("Bug.add_comment", {:id => id, :comment => comment}) 
+      end
+    end
   end
 end
